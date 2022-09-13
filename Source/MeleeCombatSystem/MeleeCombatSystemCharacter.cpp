@@ -47,6 +47,10 @@ AMeleeCombatSystemCharacter::AMeleeCombatSystemCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Right Weapon Collision Capsule
+	RightWeaponCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Right Weapon Collision Capsule"));
+	RightWeaponCollision->SetupAttachment(GetMesh(), FName("RightWeaponBone"));
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -97,6 +101,17 @@ void AMeleeCombatSystemCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+}
+
+void AMeleeCombatSystemCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Setup Right Weapon Collision Capsule
+	// RightWeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// RightWeaponCollision->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	// RightWeaponCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	// RightWeaponCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 }
 
 void AMeleeCombatSystemCharacter::MoveForward(float Value)

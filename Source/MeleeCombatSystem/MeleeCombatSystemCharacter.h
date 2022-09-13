@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Character.h"
 #include "MeleeCombatSystemCharacter.generated.h"
 
@@ -26,6 +27,8 @@ public:
 	float TurnRateGamepad;
 
 protected:
+
+	virtual void BeginPlay() override;
 
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
@@ -61,5 +64,9 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	// Right Weapon Collision
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat", meta=(AllowPrivateAccess="true"))
+	UCapsuleComponent* RightWeaponCollision;
 };
 
