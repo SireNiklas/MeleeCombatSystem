@@ -68,5 +68,7 @@ public:
 	// Right Weapon Collision
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat", meta=(AllowPrivateAccess="true"))
 	UCapsuleComponent* RightWeaponCollision;
-};
 
+private:
+	void OpenMenu();
+};

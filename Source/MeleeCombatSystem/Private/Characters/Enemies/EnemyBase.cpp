@@ -34,9 +34,9 @@ void AEnemyBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AEnemyBase::OnDeath()
 {
-
-	if (EnemyHealth <= 0)
-		GetMesh()->SetSimulatePhysics(true);
+	GetWorld()->GetTimerManager().SetTimer(OnDeathTimer, this, &AEnemyBase::OnDeath, 3.f, false);
+	GetMesh()->SetSimulatePhysics(true);
+	
 	
 }
 

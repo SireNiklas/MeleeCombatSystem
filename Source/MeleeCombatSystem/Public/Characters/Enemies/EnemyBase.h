@@ -31,4 +31,7 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, Category="Stats")
 	float EnemyHealth = 100;
+
+private:
+	FTimerHandle OnDeathTimer;
 };

@@ -65,6 +65,9 @@ void AMeleeCombatSystemCharacter::SetupPlayerInputComponent(class UInputComponen
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+	PlayerInputComponent->BindAction("OpenMenu", IE_Pressed, this, &AMeleeCombatSystemCharacter::OpenMenu);
+	PlayerInputComponent->BindAction("OpenMenu", IE_Released, this, &AMeleeCombatSystemCharacter::OpenMenu);
+	
 	PlayerInputComponent->BindAxis("Move Forward / Backward", this, &AMeleeCombatSystemCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("Move Right / Left", this, &AMeleeCombatSystemCharacter::MoveRight);
 
@@ -79,6 +82,12 @@ void AMeleeCombatSystemCharacter::SetupPlayerInputComponent(class UInputComponen
 	// handle touch devices
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &AMeleeCombatSystemCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &AMeleeCombatSystemCharacter::TouchStopped);
+}
+
+void AMeleeCombatSystemCharacter::OpenMenu()
+{
+
+	FGenericPlatformMisc::RequestExit(true);
 }
 
 void AMeleeCombatSystemCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
